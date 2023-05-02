@@ -1,1 +1,7 @@
 /env
+gadgets/apps/core/migrations/__pycache__
+gadgets/apps/core/__pycache__
+gadgets/apps/store/__pycache__
+gadgets/apps/store/migrations/__pycache__
+gadgets/gadgets/__pycache__
+gadgets/gadgets/__pycache__/urls.cpython-311.pyc
