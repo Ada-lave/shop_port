@@ -1,4 +1,10 @@
 from django.shortcuts import render
+from .cart import Cart
+def CartDetail(request):
+    cart = Cart(request)
 
-def cart(request):
-    return render(request,'cart.html')
+
+    context = {
+        'cart':cart
+    }
+    return render(request,'cart.html', context)

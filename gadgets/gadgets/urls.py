@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from apps.store.api import ApiAddToCart, ApiRemoveCart
 from apps.core.views import *
 from apps.store.views import *
 from apps.cart.views import *
@@ -26,7 +27,13 @@ urlpatterns = [
     path("", frontpage, name='frontpage'),
     path('contact/', contact, name='contact'),
     path('about/', about, name='about'),
-    path('cart/', cart, name='cart'),
+    path('cart/', CartDetail, name='cart'),
+
+
+    #API
+    path('api/AddToCard/',ApiAddToCart, name='ApiAddToCart'),
+    path('api/RemoveCart/', ApiRemoveCart),
+
 
     path("<slug:category_slug>/", category_detail, name='category_detail'),
     path("<slug:category_slug>/<slug:slug>/", product_detail, name='product_detail'),
