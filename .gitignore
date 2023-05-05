@@ -5,3 +5,5 @@ gadgets/apps/store/__pycache__
 gadgets/apps/store/migrations/__pycache__
 gadgets/gadgets/__pycache__
 gadgets/gadgets/__pycache__/urls.cpython-311.pyc
+gadgets/apps/cart/__pycache__/cart.cpython-311.pyc
+gadgets/apps/cart/__pycache__/views.cpython-311.pyc

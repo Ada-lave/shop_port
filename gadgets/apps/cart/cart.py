@@ -22,10 +22,11 @@ class Cart(object):
         
         for item in self.cart.values():
     
-            item['total_price'] = int(item['price']) * int(item['quantity'])
+            item['total_price'] = float(item['price']) * int(item['quantity'])
 
             yield item
-    
+        
+        print(self.cart)
     def __len__(self):
         return sum(item['quantity'] for item in self.cart.values())
     
@@ -55,6 +56,7 @@ class Cart(object):
         self.save()
     
     def save(self):
+        
         print('save')
         self.session[settings.CART_SESSION_ID] = self.cart
         self.session.modified = True

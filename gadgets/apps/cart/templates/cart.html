@@ -19,8 +19,8 @@
             {% with product=item.product %}
                 <tr>
                     <td>{{product.title}}</td>
-                    <td> </td>
-                    <td>{{ product.total_price }}</td>
+                    <td>{{ item.quantity }} </td>
+                    <td>{{ item.total_price }}</td>
 
                     <td><button v-on:click="RemoveProduct({{ product.id }})">Delete</button></td>
                 </tr>
