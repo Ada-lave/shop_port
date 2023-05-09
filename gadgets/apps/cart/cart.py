@@ -26,7 +26,7 @@ class Cart(object):
 
             yield item
         
-        print(self.cart)
+        
     def __len__(self):
         return sum(item['quantity'] for item in self.cart.values())
     
@@ -45,10 +45,13 @@ class Cart(object):
 
         if product_id not in self.cart:
             print('test 1')
-            self.cart[product_id] = {'quantity':1, 'price':price, 'id':product_id}
+            self.cart[product_id] = {'quantity':0, 'price':price, 'id':product_id}
 
-        if update_q:
-            self.cart[product_id]['quantity'] = quantity
+        if update_q is False:
+            self.cart[product_id]['quantity'] = 1
+        
+        elif update_q == 'inc':
+            self.cart[product_id]['quantity'] -= 1
         else:
             print('test 2')
             self.cart[product_id]['quantity'] += 1
@@ -60,3 +63,9 @@ class Cart(object):
         print('save')
         self.session[settings.CART_SESSION_ID] = self.cart
         self.session.modified = True
+
+    def TotalLenght(self):
+        return sum(int(item['quantity']) for item in self.cart.values())
+    
+    def TotalPrice(self):
+        return sum((item['total_price'] for item in self.cart.values()))

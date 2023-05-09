@@ -5,6 +5,13 @@ from django.shortcuts import get_object_or_404
 from apps.cart.cart import Cart
 
 from .models import Product
+from apps.order.models import Order, OrederItem
+
+def ApiCheckout(request):
+    data = json.loads(request.body)
+    jsonresp = {'success':True}
+
+    first_name = data['first_name']
 
 def ApiAddToCart(request):
     data = json.loads(request.body)
@@ -21,6 +28,8 @@ def ApiAddToCart(request):
 
     if not update:
         cart.add(product=product, quantity=1, update_q=False)
+    elif update=='inc':
+        cart.add(product=product, quantity=quantity, update_q='inc')
     else:
         cart.add(product=product, quantity=quantity, update_q=True)
 

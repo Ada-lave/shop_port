@@ -1,8 +1,15 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% block content %}
 <div class="columns is-multiline">
   {% for product in products %}
   <div class="column is-3">
     <div class="card">
+      <div card-image>
+        <figure class="image">
+          <img src="media/{{ product.thumbnail }}">
+        </figure>
+
+      </div>
       <div class="card-content">
         <div class="media-content">
           <p class="title is-3">{{ product.title }}</p>
