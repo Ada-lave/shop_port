@@ -13,6 +13,8 @@ class Order(models.Model):
     paid = models.BooleanField(default=False)
     paidAmount = models.FloatField(blank=True, null=True)
 
+    used_coupon = models.CharField(max_length=50, blank=True, null=True)
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 

@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
-from apps.store.api import ApiAddToCart, ApiRemoveCart
+from apps.store.api import ApiAddToCart, ApiRemoveCart, ApiCheckout
+from apps.coupon.api import ApiCanUse
 from apps.core.views import *
 from apps.store.views import *
 from apps.cart.views import *
@@ -32,12 +33,15 @@ urlpatterns = [
     path('cart/', CartDetail, name='cart'),
 
 
-    #API
-    path('api/AddToCard/',ApiAddToCart, name='ApiAddToCart'),
+    # API
+    path('api/AddToCard/', ApiAddToCart, name='ApiAddToCart'),
     path('api/RemoveCart/', ApiRemoveCart),
+    path('api/checkout/', ApiCheckout),
+    path('api/checkcoupon/', ApiCanUse),
 
 
     path("<slug:category_slug>/", category_detail, name='category_detail'),
-    path("<slug:category_slug>/<slug:slug>/", product_detail, name='product_detail'),
-    
+    path("<slug:category_slug>/<slug:slug>/",
+         product_detail, name='product_detail'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

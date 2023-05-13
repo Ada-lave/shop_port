@@ -64,8 +64,14 @@ class Cart(object):
         self.session[settings.CART_SESSION_ID] = self.cart
         self.session.modified = True
 
+    def clear(self):
+        del self.session[settings.CART_SESSION_ID]
+        self.session.modified = True
     def TotalLenght(self):
         return sum(int(item['quantity']) for item in self.cart.values())
     
     def TotalPrice(self):
-        return sum((item['total_price'] for item in self.cart.values()))
+        try:
+            return sum((item['total_price'] for item in self.cart.values()))
+        except Exception:
+            return 0
