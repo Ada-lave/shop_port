@@ -35,6 +35,8 @@ class Cart(object):
             print('test rm')
             del self.cart[product_id]
             self.save()
+        else:
+            print('error del')
 
     
     def add(self, product, quantity, update_q=False):
