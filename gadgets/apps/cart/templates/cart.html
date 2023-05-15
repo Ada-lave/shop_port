@@ -15,24 +15,22 @@
                 <th></th>
             </thead>
             <tbody>
-                {% for item in cart %}
-            {% with product=item.product %}
-                <tr>
-                    <td>{{product.title}}</td>
+                
+                <tr v-for="product in products">
+                    <td>[[ product.title ]]</td>
                     <td>
-                        <button v-on:click="DecrimentQuantity({{ product.id }})">- </button> 
-                        {{ item.quantity }}
-                        <button v-on:click="incrementQuantity({{ product.id }}, {{ item.quantity }})">+</button>
+                        <button v-on:click="DecrimentQuantity([[ product.id ]])">- </button> 
+                        [[ product.quantity ]]
+                        <button v-on:click="incrementQuantity([[ product.id ]], [[ product.quantity]] )">+</button>
                     </td>
-                    <td>{{ item.total_price }}</td>
+                    <td>[[ product.price ]]</td>
 
-                    <td><button v-on:click="RemoveProduct({{ product.id }})">Delete</button></td>
+                    <td><button v-on:click="RemoveProduct([[ product.id ]])">Delete</button></td>
                 </tr>
 
                 
                 
-            {% endwith %}
-        {% endfor %}
+            
             </tbody>
             <tfoot>
                 <tr>
@@ -111,13 +109,24 @@
                 address: "",
                 zipcode: "",
                 place: "",
+                products: {{productstr|safe}},
+                coupon_value: 0,
+                coupon_code: ''
 
             }
         },
+        computed: {
+            totalCostWithCoupon: function(){
+                if (this.coupon_value>0){
+                    return store.state.totalCost * (parseInt(this.coupon_value)/100)
+                }
+            }
+        },
+
 
         mounted() {
             console.log('Mounted')
-            console.log(this.products)
+            console.log(typeof(this.products[0]['id']))
         },
         methods: {
 
@@ -145,6 +154,7 @@
                 })
                 .then((response) => {
                     console.log(response)
+                    
                     window.location.href('/')
                     
                 })
@@ -181,7 +191,7 @@
             incrementQuantity(prod_id, qua) {
             
 
-                var data = {'product_id':prod_id, 'update':true, 'quantity':qua+1}
+                var data = {'product_id':parseInt(prod_id), 'update':true, 'quantity':qua+1}
 
                 store.commit('increment',1)
 
@@ -196,6 +206,15 @@
                 })
                 .then((response) => {
                     console.log(response)
+                    for (let i = 0; i<this.products.length; i++){
+                        let product = this.products[i]
+                        
+
+                        if (product.id == prod_id){
+                            console.log('inc')
+                            this.products[i].quantity++
+                        }
+                    }
                 })
                 
                 .catch(function error(){

@@ -4,13 +4,13 @@ from .cart import Cart
 
 def CartDetail(request):
     cart = Cart(request)
-    productstr = ''
+    productstr = []
 
     for item in cart:
         product = item['product']
-        b = "{'id':'%s', 'title':'%s', 'price':'%s','quantity':'%s'}" % (product.id, product.title, product.price, item['quantity'])
+        b = {'id':product.id, 'title':product.title, 'price':product.price,'quantity':item['quantity']}
 
-        productstr += b
+        productstr.append(b)
     print(productstr)
     context = {
         'cart':cart,
