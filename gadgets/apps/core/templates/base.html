@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,6 +15,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"
     />
+    <link rel="stylesheet" href="{% static 'main.css' %}">
     <title>{% block title %}{% endblock %}Gadgets</title>
   </head>
   <body>
@@ -50,8 +52,15 @@
             >{{ category.title }}</a
           >
           {% endfor %}
-          <div class="navbar-item">
-            <a href="{% url 'cart' %}" class="button is-primary">Cart</a>
+          <div
+            class="navbar-item"
+            id="navbarapp"
+          >
+            <a
+              href="{% url 'cart' %}"
+              class="button is-primary"
+              >Cart ([[ NumItems ]])</a
+            >
           </div>
         </div>
       </div>
@@ -67,18 +76,42 @@
           <a
             href="{% url 'contact' %}"
             class="navbar-item"
-            >Contact</a>
-          
-            <a
+            >Contact</a
+          >
+
+          <a
             href="{% url 'about' %}"
             class="navbar-item"
-            >About</a>
-          
+            >About</a
+          >
         </div>
       </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    {% block scripts %}
-    {% endblock %}
+    <script src="https://unpkg.com/vuex@3.5.1/dist/vuex.js"></script>
+    <script>
+      var store = new Vuex.Store({
+        state: {
+          
+        },
+        mutations: {
+          increment(state, quantity) {
+              state.NumItems += quantity
+          }
+        }
+
+      })
+      var navbarapp = new Vue({
+        el: '#navbarapp',
+        delimiters: ['[[',']]'],
+        store: store,
+        computed: {
+          NumItems: function() {
+            return store.state.NumItems
+          }
+        }
+      })
+    </script>
+    {% block scripts %} {% endblock %}
   </body>
 </html>
