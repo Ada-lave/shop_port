@@ -22,6 +22,7 @@ from apps.coupon.api import ApiCanUse
 from apps.core.views import *
 from apps.store.views import *
 from apps.cart.views import *
+from apps.api.views import *
 from django.conf import settings
 
 urlpatterns = [
@@ -38,6 +39,7 @@ urlpatterns = [
     path('api/RemoveCart/', ApiRemoveCart),
     path('api/checkout/', ApiCheckout),
     path('api/checkcoupon/', ApiCanUse),
+    path('api/listprod/',ProductViewSets.as_view()),
 
 
     path("<slug:category_slug>/", category_detail, name='category_detail'),

@@ -2,7 +2,8 @@ from django.shortcuts import render
 from apps.store.models import *
 
 def frontpage(request):
-    products = Product.objects.all()
+    products = Product.objects.all()[:5]
+
 
     context = {
         'products':products
