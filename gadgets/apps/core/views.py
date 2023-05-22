@@ -1,18 +1,19 @@
 from django.shortcuts import render
 from apps.store.models import *
 
-def frontpage(request):
-    products = Product.objects.all()[:5]
 
+def frontpage(request):
+    products = Product.objects.all()[:11]
 
     context = {
-        'products':products
+        'products': products
     }
     return render(request, 'frontpage.html', context)
 
 
 def contact(request):
     return render(request, 'contact.html')
+
 
 def about(request):
     return render(request, 'about.html')
