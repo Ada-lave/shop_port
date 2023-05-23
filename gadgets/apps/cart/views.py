@@ -8,7 +8,7 @@ def CartDetail(request):
 
     for item in cart:
         product = item['product']
-        b = {'id':product.id, 'title':product.title, 'price':product.price,'quantity':item['quantity']}
+        b = {'id':product.id, 'title':product.title, 'price':product.price,'quantity':item['quantity'],'total_price':item['total_price']}
 
         productstr.append(b)
     print(productstr)

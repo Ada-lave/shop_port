@@ -59,7 +59,7 @@
             <a
               href="{% url 'cart' %}"
               class="button is-primary"
-              >Cart ([[ NumItems ]])</a
+              >Cart [[ numItems ]]</a
             >
           </div>
         </div>
@@ -92,11 +92,11 @@
     <script>
       var store = new Vuex.Store({
         state: {
-          
+          numItems: {{ cart.TotalLenght }}
         },
         mutations: {
           increment(state, quantity) {
-              state.NumItems += quantity
+              state.numItems += quantity
           }
         }
 
@@ -105,9 +105,10 @@
         el: '#navbarapp',
         delimiters: ['[[',']]'],
         store: store,
-        computed: {
-          NumItems: function() {
-            return store.state.NumItems
+        
+        computed : {
+          numItems: function(){
+            return store.state.numItems
           }
         }
       })

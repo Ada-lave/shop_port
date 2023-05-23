@@ -23,7 +23,7 @@
                         [[ product.quantity ]]
                         <button v-on:click="incrementQuantity([[ product.id ]], [[ product.quantity]] )">+</button>
                     </td>
-                    <td>[[ product.price ]]</td>
+                    <td>[[ product.total_price ]]</td>
 
                     <td><button v-on:click="RemoveProduct([[ product.id ]])">Delete</button></td>
                 </tr>
@@ -167,7 +167,7 @@
             DecrimentQuantity(prod_id, qua) {
             
 
-                var data = {'product_id':prod_id, 'update':'inc', 'quantity':qua-1}
+                var data = {'product_id':parseInt(prod_id), 'update':'inc', 'quantity':qua-1}
 
                 store.commit('increment',-1)
 
@@ -212,7 +212,9 @@
 
                         if (product.id == prod_id){
                             console.log('inc')
+                            console.log(typeof(this.products[i].price))
                             this.products[i].quantity++
+                            this.products[i].total_price = parseFloat(this.products[i].quantity)*parseFloat(this.products[i].price)
                         }
                     }
                 })
